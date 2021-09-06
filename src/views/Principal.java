@@ -11,21 +11,28 @@ import javax.swing.JFrame;
  *
  * @author Frankie
  */
-public class Principal extends javax.swing.JFrame {
+public final class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    Login login;
     public Principal() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        Login login = new Login(this);
-        this.dkp_panel.add(login);
-        login.setVisible(true);
+        this.openLogin();
+        
     }
     
     public void enableMenu(boolean b){
         this.mi_aplicacion.setEnabled(b);
+    }
+    
+    public void openLogin(){
+        login = new Login(this);
+        this.dkp_panel.add(login);
+        login.setVisible(true);
+    }
+    
+    public void showLogin(boolean b){
+        this.login.setVisible(b);
     }
 
     /**
@@ -41,6 +48,7 @@ public class Principal extends javax.swing.JFrame {
         dkp_panel = new javax.swing.JDesktopPane();
         mb_menu = new javax.swing.JMenuBar();
         mi_aplicacion = new javax.swing.JMenu();
+        mi_config = new javax.swing.JMenuItem();
         mi_cerrarsesion = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mi_salir = new javax.swing.JMenuItem();
@@ -64,6 +72,15 @@ public class Principal extends javax.swing.JFrame {
         mi_aplicacion.setText("Aplicación");
         mi_aplicacion.setEnabled(false);
 
+        mi_config.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mi_config.setText("Configuración");
+        mi_config.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_configActionPerformed(evt);
+            }
+        });
+        mi_aplicacion.add(mi_config);
+
         mi_cerrarsesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mi_cerrarsesion.setText("Cerrar Sesión");
         mi_cerrarsesion.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +93,11 @@ public class Principal extends javax.swing.JFrame {
 
         mi_salir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mi_salir.setText("Salir");
+        mi_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_salirActionPerformed(evt);
+            }
+        });
         mi_aplicacion.add(mi_salir);
 
         mb_menu.add(mi_aplicacion);
@@ -97,8 +119,23 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mi_cerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_cerrarsesionActionPerformed
-        // TODO add your handling code here:
+        //Bloqueamos el menu
+        this.enableMenu(false);
+        //Abrimos el formulario de login otra
+        this.showLogin(true);
     }//GEN-LAST:event_mi_cerrarsesionActionPerformed
+
+    private void mi_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mi_salirActionPerformed
+
+    private void mi_configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_configActionPerformed
+        //Creamos una instancia del objeto Configuration
+        Configuration config = new Configuration(this);
+        this.dkp_panel.add(config);
+        config.setVisible(true);
+        this.enableMenu(false);
+    }//GEN-LAST:event_mi_configActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,6 +179,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu mi_aplicacion;
     private javax.swing.JMenuItem mi_cerrarsesion;
+    private javax.swing.JMenuItem mi_config;
     private javax.swing.JMenuItem mi_salir;
     // End of variables declaration//GEN-END:variables
 }

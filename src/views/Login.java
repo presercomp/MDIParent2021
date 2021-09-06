@@ -56,6 +56,11 @@ public class Login extends javax.swing.JInternalFrame {
         lbl_password.setText("Clave");
 
         btn_cancel.setText("Cancelar");
+        btn_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelActionPerformed(evt);
+            }
+        });
 
         txt_images.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/login_background.jpg"))); // NOI18N
 
@@ -68,18 +73,17 @@ public class Login extends javax.swing.JInternalFrame {
                 .addComponent(txt_images, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txt_user)
-                        .addComponent(txt_password)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_password)
-                                .addComponent(lbl_user))
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(txt_user)
+                    .addComponent(txt_password)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_password)
+                            .addComponent(lbl_user)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,12 +119,18 @@ public class Login extends javax.swing.JInternalFrame {
         String input_pass = new String(this.txt_password.getPassword());
         System.out.println(input_user+ " "+input_pass);
         if(valid_user.equals(input_user) && valid_pass.equals(input_pass)){
+            this.txt_user.setText("");
+            this.txt_password.setText("");
             this.principal.enableMenu(true);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Nombre de usuario o clave erroneos", "Error de logueo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_cancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
