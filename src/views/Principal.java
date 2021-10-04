@@ -47,6 +47,14 @@ public final class Principal extends javax.swing.JFrame {
     public void showLogin(boolean b){
         this.login.setVisible(b);
     }
+    
+    public void openEmpleadoAgregar(EmpleadosAdmin ed){
+        EmpleadosAgregar ea = new EmpleadosAgregar(ed);
+        this.setCenterWindow(ea);
+        this.dkp_panel.add(ea);
+        ed.setVisible(false);
+        ea.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +85,7 @@ public final class Principal extends javax.swing.JFrame {
         mi_inventario = new javax.swing.JMenuItem();
         mi_mantenedores = new javax.swing.JMenu();
         mi_man_empresas = new javax.swing.JMenuItem();
-        mi_man_personas = new javax.swing.JMenuItem();
+        mi_man_empleados = new javax.swing.JMenuItem();
         mi_man_productos = new javax.swing.JMenuItem();
         mi_man_usuarios = new javax.swing.JMenuItem();
 
@@ -177,8 +185,13 @@ public final class Principal extends javax.swing.JFrame {
         mi_man_empresas.setText("Empresas");
         mi_mantenedores.add(mi_man_empresas);
 
-        mi_man_personas.setText("Personas");
-        mi_mantenedores.add(mi_man_personas);
+        mi_man_empleados.setText("Empleados");
+        mi_man_empleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_man_empleadosActionPerformed(evt);
+            }
+        });
+        mi_mantenedores.add(mi_man_empleados);
 
         mi_man_productos.setText("Productos");
         mi_mantenedores.add(mi_man_productos);
@@ -232,6 +245,14 @@ public final class Principal extends javax.swing.JFrame {
         this.enableMenu(false);
     }//GEN-LAST:event_mi_honorariosActionPerformed
 
+    private void mi_man_empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_man_empleadosActionPerformed
+        EmpleadosAdmin ea = new EmpleadosAdmin(this);
+        this.setCenterWindow(ea);
+        this.dkp_panel.add(ea);
+        ea.setVisible(true);
+        this.enableMenu(false);
+    }//GEN-LAST:event_mi_man_empleadosActionPerformed
+
     private void setCenterWindow(javax.swing.JInternalFrame e){
         this.childSize = e.getSize();
         e.setLocation((this.desktopSize.width - this.childSize.width)/2, (this.desktopSize.height - (this.childSize.height + 100))/2);
@@ -283,8 +304,8 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mi_honorarios;
     private javax.swing.JMenuItem mi_inventario;
     private javax.swing.JMenuItem mi_liquidacion;
+    private javax.swing.JMenuItem mi_man_empleados;
     private javax.swing.JMenuItem mi_man_empresas;
-    private javax.swing.JMenuItem mi_man_personas;
     private javax.swing.JMenuItem mi_man_productos;
     private javax.swing.JMenuItem mi_man_usuarios;
     private javax.swing.JMenu mi_mantenedores;

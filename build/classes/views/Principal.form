@@ -125,10 +125,13 @@
                 <Property name="text" type="java.lang.String" value="Empresas"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mi_man_personas">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_man_empleados">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Personas"/>
+                <Property name="text" type="java.lang.String" value="Empleados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_man_empleadosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mi_man_productos">
               <Properties>
