@@ -52,6 +52,96 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="mi_rrhh">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RR.HH."/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_honorarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calculo Honorarios"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_honorariosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_liquidacion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Liquidacion de Sueldos"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mi_ventas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ventas"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_generar_venta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Generar Venta"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_reimpresion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reimprimir Boleta / Factura"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mi_bodega">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bodega"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_movimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registrar Movimiento"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_merma">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registrar Merma"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_inventario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Obtener Inventario"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mi_mantenedores">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mantenedores"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_man_empresas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Empresas"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_man_personas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Personas"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_man_productos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Productos"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mi_man_usuarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Usuarios"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

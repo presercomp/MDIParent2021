@@ -7,6 +7,7 @@
 package views;
 
 import javax.swing.JOptionPane;
+import models.Users;
 
 /**
  *
@@ -113,17 +114,13 @@ public class Login extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        String valid_user = "admin";
-        String valid_pass = "macoy123";
-        String input_user = this.txt_user.getText();
-        String input_pass = new String(this.txt_password.getPassword());
-        System.out.println(input_user+ " "+input_pass);
-        if(valid_user.equals(input_user) && valid_pass.equals(input_pass)){
+        Users u = new Users();
+        if(u.login(this.txt_user.getText(), new String(this.txt_password.getPassword()))){
             this.txt_user.setText("");
             this.txt_password.setText("");
             this.principal.enableMenu(true);
             this.setVisible(false);
-        } else {
+        } else{
             JOptionPane.showMessageDialog(this, "Nombre de usuario o clave erroneos", "Error de logueo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_submitActionPerformed

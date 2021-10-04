@@ -5,6 +5,8 @@
  */
 package views;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
@@ -13,20 +15,31 @@ import javax.swing.JFrame;
  */
 public final class Principal extends javax.swing.JFrame {
 
+    Dimension desktopSize;
+    Dimension childSize;
     Login login;
     public Principal() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.desktopSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.openLogin();
+        
         
     }
     
     public void enableMenu(boolean b){
         this.mi_aplicacion.setEnabled(b);
+        this.mi_rrhh.setEnabled(b);
+        this.mi_bodega.setEnabled(b);
+        this.mi_ventas.setEnabled(b);
+        this.mi_mantenedores.setEnabled(b);
     }
+    
+ 
     
     public void openLogin(){
         login = new Login(this);
+        this.setCenterWindow(login);
         this.dkp_panel.add(login);
         login.setVisible(true);
     }
@@ -52,6 +65,21 @@ public final class Principal extends javax.swing.JFrame {
         mi_cerrarsesion = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mi_salir = new javax.swing.JMenuItem();
+        mi_rrhh = new javax.swing.JMenu();
+        mi_honorarios = new javax.swing.JMenuItem();
+        mi_liquidacion = new javax.swing.JMenuItem();
+        mi_ventas = new javax.swing.JMenu();
+        mi_generar_venta = new javax.swing.JMenuItem();
+        mi_reimpresion = new javax.swing.JMenuItem();
+        mi_bodega = new javax.swing.JMenu();
+        mi_movimiento = new javax.swing.JMenuItem();
+        mi_merma = new javax.swing.JMenuItem();
+        mi_inventario = new javax.swing.JMenuItem();
+        mi_mantenedores = new javax.swing.JMenu();
+        mi_man_empresas = new javax.swing.JMenuItem();
+        mi_man_personas = new javax.swing.JMenuItem();
+        mi_man_productos = new javax.swing.JMenuItem();
+        mi_man_usuarios = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -102,6 +130,64 @@ public final class Principal extends javax.swing.JFrame {
 
         mb_menu.add(mi_aplicacion);
 
+        mi_rrhh.setText("RR.HH.");
+        mi_rrhh.setEnabled(false);
+
+        mi_honorarios.setText("Calculo Honorarios");
+        mi_honorarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_honorariosActionPerformed(evt);
+            }
+        });
+        mi_rrhh.add(mi_honorarios);
+
+        mi_liquidacion.setText("Liquidacion de Sueldos");
+        mi_rrhh.add(mi_liquidacion);
+
+        mb_menu.add(mi_rrhh);
+
+        mi_ventas.setText("Ventas");
+        mi_ventas.setEnabled(false);
+
+        mi_generar_venta.setText("Generar Venta");
+        mi_ventas.add(mi_generar_venta);
+
+        mi_reimpresion.setText("Reimprimir Boleta / Factura");
+        mi_ventas.add(mi_reimpresion);
+
+        mb_menu.add(mi_ventas);
+
+        mi_bodega.setText("Bodega");
+        mi_bodega.setEnabled(false);
+
+        mi_movimiento.setText("Registrar Movimiento");
+        mi_bodega.add(mi_movimiento);
+
+        mi_merma.setText("Registrar Merma");
+        mi_bodega.add(mi_merma);
+
+        mi_inventario.setText("Obtener Inventario");
+        mi_bodega.add(mi_inventario);
+
+        mb_menu.add(mi_bodega);
+
+        mi_mantenedores.setText("Mantenedores");
+        mi_mantenedores.setEnabled(false);
+
+        mi_man_empresas.setText("Empresas");
+        mi_mantenedores.add(mi_man_empresas);
+
+        mi_man_personas.setText("Personas");
+        mi_mantenedores.add(mi_man_personas);
+
+        mi_man_productos.setText("Productos");
+        mi_mantenedores.add(mi_man_productos);
+
+        mi_man_usuarios.setText("Usuarios");
+        mi_mantenedores.add(mi_man_usuarios);
+
+        mb_menu.add(mi_mantenedores);
+
         setJMenuBar(mb_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,11 +218,24 @@ public final class Principal extends javax.swing.JFrame {
     private void mi_configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_configActionPerformed
         //Creamos una instancia del objeto Configuration
         Configuration config = new Configuration(this);
+        this.setCenterWindow(config);
         this.dkp_panel.add(config);
         config.setVisible(true);
         this.enableMenu(false);
     }//GEN-LAST:event_mi_configActionPerformed
 
+    private void mi_honorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_honorariosActionPerformed
+        Honoraries hono = new Honoraries(this);
+        this.setCenterWindow(hono);
+        this.dkp_panel.add(hono);
+        hono.setVisible(true);
+        this.enableMenu(false);
+    }//GEN-LAST:event_mi_honorariosActionPerformed
+
+    private void setCenterWindow(javax.swing.JInternalFrame e){
+        this.childSize = e.getSize();
+        e.setLocation((this.desktopSize.width - this.childSize.width)/2, (this.desktopSize.height - (this.childSize.height + 100))/2);
+    }
     /**
      * @param args the command line arguments
      */
@@ -163,7 +262,6 @@ public final class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -178,8 +276,23 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu mi_aplicacion;
+    private javax.swing.JMenu mi_bodega;
     private javax.swing.JMenuItem mi_cerrarsesion;
     private javax.swing.JMenuItem mi_config;
+    private javax.swing.JMenuItem mi_generar_venta;
+    private javax.swing.JMenuItem mi_honorarios;
+    private javax.swing.JMenuItem mi_inventario;
+    private javax.swing.JMenuItem mi_liquidacion;
+    private javax.swing.JMenuItem mi_man_empresas;
+    private javax.swing.JMenuItem mi_man_personas;
+    private javax.swing.JMenuItem mi_man_productos;
+    private javax.swing.JMenuItem mi_man_usuarios;
+    private javax.swing.JMenu mi_mantenedores;
+    private javax.swing.JMenuItem mi_merma;
+    private javax.swing.JMenuItem mi_movimiento;
+    private javax.swing.JMenuItem mi_reimpresion;
+    private javax.swing.JMenu mi_rrhh;
     private javax.swing.JMenuItem mi_salir;
+    private javax.swing.JMenu mi_ventas;
     // End of variables declaration//GEN-END:variables
 }
