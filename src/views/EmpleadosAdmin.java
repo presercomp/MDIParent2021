@@ -5,6 +5,8 @@
  */
 package views;
 
+import models.Employee;
+
 /**
  *
  * @author Frankie
@@ -15,9 +17,12 @@ public class EmpleadosAdmin extends javax.swing.JInternalFrame {
      * Creates new form EmpleadosAdmin
      */
     Principal principal;
+    Employee empleado;
     public EmpleadosAdmin(Principal p) {
         initComponents();
         this.principal = p;
+        empleado = new Employee();
+        tbl_datos.setModel(empleado.getEmployees());
     }
 
     /**
@@ -45,14 +50,14 @@ public class EmpleadosAdmin extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "RUT", "Paterno", "Materno", "Nombres", "Departamento", "Cargo"
+                "id_empleado", "rut_persona", "id_sucursal", "es_encargado", "activo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

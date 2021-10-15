@@ -20,7 +20,7 @@ public class MySQL {
             //Registramos Driver MySQL
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             //Generamos conexión al servidor.
-            this.cn = DriverManager.getConnection("jdbc:mysql://localhost/mdiparent", "root", "");
+            this.cn = DriverManager.getConnection("jdbc:mysql://localhost/siegal_gx", "root", "");
             //Se crea estamento para recibir consultas
             this.s = this.cn.createStatement();
         } catch (SQLException ex) {

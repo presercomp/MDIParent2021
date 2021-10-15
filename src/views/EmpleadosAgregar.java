@@ -6,6 +6,8 @@
 package views;
 
 import javax.swing.JOptionPane;
+import models.Employee;
+import models.Person;
 import utils.Functions;
 
 /**
@@ -40,11 +42,10 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
         txt_nombres = new javax.swing.JTextField();
         lbl_nombres = new javax.swing.JLabel();
         lbl_departamento = new javax.swing.JLabel();
-        lbl_cargo = new javax.swing.JLabel();
-        cmb_departamento = new javax.swing.JComboBox<>();
-        cmb_cargo = new javax.swing.JComboBox<>();
+        cmb_sucursal = new javax.swing.JComboBox<>();
         btn_guardar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
+        chk_es_encargado = new javax.swing.JCheckBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nuevo Empleado");
@@ -57,13 +58,9 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
 
         lbl_nombres.setText("Nombres");
 
-        lbl_departamento.setText("Departamento");
+        lbl_departamento.setText("Sucursal");
 
-        lbl_cargo.setText("Cargo");
-
-        cmb_departamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_sucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btn_guardar.setText("Guardar");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +76,8 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
             }
         });
 
+        chk_es_encargado.setText("es encargado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,14 +86,17 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_departamento)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_nombres)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmb_departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmb_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chk_es_encargado))
                                     .addComponent(jLabel1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txt_run, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,17 +112,11 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txt_materno, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbl_materno))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_departamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cargo)
-                        .addGap(177, 177, 177))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -149,18 +145,16 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
                 .addGap(3, 3, 3)
                 .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_departamento)
-                    .addComponent(lbl_cargo))
+                .addComponent(lbl_departamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_departamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chk_es_encargado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_guardar)
                     .addComponent(btn_cancelar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,11 +169,17 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
         // Validar que el formulario esté correctamente lleno
         String errores = "";
         errores += this.txt_run.getText().length() < 6 || !Functions.isNumeric(this.txt_run.getText()) ? "- Ingrese el numero de RUT.\n" : "";
-        
+        errores += this.txt_paterno.getText().length() == 0 ? "- Ingrese el apellido paterno" : "";
+        errores += this.txt_nombres.getText().length() == 0 ? "- Ingrese el apellido paterno" : "";
+        errores += this.cmb_sucursal.toString() == "Seleccione" ? "- Seleccione una sucursal" : "";
         if(errores.length() > 0){
             JOptionPane.showMessageDialog(rootPane, "Corrija los errores:\n"+errores);
         } else {
-            //Se hace la inserción en la BD
+            Person p = new Person(Integer.parseInt(this.txt_run.getText()), this.txt_paterno.getText(), this.txt_materno.getText(), this.txt_nombres.getText(), "2020-10-10", "+55555");
+            p.save();
+            Employee e = new Employee(Integer.parseInt(this.txt_run.getText()), 1, this.chk_es_encargado.isSelected());
+            e.save();
+            
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
@@ -187,10 +187,9 @@ public class EmpleadosAgregar extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JComboBox<String> cmb_cargo;
-    private javax.swing.JComboBox<String> cmb_departamento;
+    private javax.swing.JCheckBox chk_es_encargado;
+    private javax.swing.JComboBox<String> cmb_sucursal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbl_cargo;
     private javax.swing.JLabel lbl_departamento;
     private javax.swing.JLabel lbl_materno;
     private javax.swing.JLabel lbl_nombres;

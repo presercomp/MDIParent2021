@@ -19,9 +19,10 @@ import utils.MySQL;
  */
 public class Users extends MySQL {
     private int id_usuario;
-    private int rut;
-    private String correo;
+    private int id_empleado;
+    private String apodo;
     private String clave;
+    private int vigente;
     
     public Users(){
         super();
@@ -38,7 +39,7 @@ public class Users extends MySQL {
      */
     public boolean login(String user, String pass){
         String query = "select * from usuario ";
-        query +="where correo = '"+user+"' ";
+        query +="where apodo = '"+user+"' ";
         query +="and clave = '"+pass+"'";
         System.out.println(query);
         try {
