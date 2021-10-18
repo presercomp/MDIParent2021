@@ -22,7 +22,7 @@ public class EmpleadosAdmin extends javax.swing.JInternalFrame {
         initComponents();
         this.principal = p;
         empleado = new Employee();
-        tbl_datos.setModel(empleado.getEmployees());
+        this.recargarEmpleados();
     }
 
     /**
@@ -116,6 +116,10 @@ public class EmpleadosAdmin extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void recargarEmpleados(){
+        tbl_datos.setModel(empleado.getEmployees());
+    }
+    
     private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
          this.setVisible(false);
         this.principal.enableMenu(true);
