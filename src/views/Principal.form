@@ -150,7 +150,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Aplicacaci&#xf3;n Maestro Detalle"/>
+    <Property name="title" type="java.lang.String" value=".: SIGEAL :. Sistema de Gesti&#xf3;n de Almacenes"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mb_menu"/>

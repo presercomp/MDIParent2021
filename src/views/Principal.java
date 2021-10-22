@@ -92,7 +92,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Aplicacación Maestro Detalle");
+        setTitle(".: SIGEAL :. Sistema de Gestión de Almacenes");
 
         javax.swing.GroupLayout dkp_panelLayout = new javax.swing.GroupLayout(dkp_panel);
         dkp_panel.setLayout(dkp_panelLayout);
