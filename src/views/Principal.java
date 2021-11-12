@@ -55,6 +55,14 @@ public final class Principal extends javax.swing.JFrame {
         ed.setVisible(false);
         ea.setVisible(true);
     }
+    
+    public void openProductoAgregar(ProductosAdmin pd){
+        ProductosAgregar pa = new ProductosAgregar(pd);
+        this.setCenterWindow(pa);
+        this.dkp_panel.add(pa);
+        pd.setVisible(false);
+        pa.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,6 +202,11 @@ public final class Principal extends javax.swing.JFrame {
         mi_mantenedores.add(mi_man_empleados);
 
         mi_man_productos.setText("Productos");
+        mi_man_productos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_man_productosActionPerformed(evt);
+            }
+        });
         mi_mantenedores.add(mi_man_productos);
 
         mi_man_usuarios.setText("Usuarios");
@@ -252,6 +265,14 @@ public final class Principal extends javax.swing.JFrame {
         ea.setVisible(true);
         this.enableMenu(false);
     }//GEN-LAST:event_mi_man_empleadosActionPerformed
+
+    private void mi_man_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_man_productosActionPerformed
+        ProductosAdmin pa = new ProductosAdmin(this);
+        this.setCenterWindow(pa);
+        this.dkp_panel.add(pa);
+        pa.setVisible(true);
+        this.enableMenu(false);
+    }//GEN-LAST:event_mi_man_productosActionPerformed
 
     private void setCenterWindow(javax.swing.JInternalFrame e){
         this.childSize = e.getSize();

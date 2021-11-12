@@ -5,6 +5,10 @@
  */
 package views;
 
+import javax.swing.JOptionPane;
+import models.Enterprice;
+import utils.Functions;
+
 /**
  *
  * @author Frankie
@@ -15,6 +19,7 @@ public class Configuration extends javax.swing.JInternalFrame {
     public Configuration(Principal p) {
         initComponents();
         this.principal = p;
+        getData();
     }
 
     /**
@@ -53,6 +58,11 @@ public class Configuration extends javax.swing.JInternalFrame {
         txt_dv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         btn_cancelar.setText("Cancelar");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,10 +78,14 @@ public class Configuration extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_titulo)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_razonsocial)
                             .addComponent(lbl_rut)
@@ -87,9 +101,8 @@ public class Configuration extends javax.swing.JInternalFrame {
                             .addComponent(txt_razonsocial)
                             .addComponent(txt_giro, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(lbl_titulo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,20 +125,79 @@ public class Configuration extends javax.swing.JInternalFrame {
                     .addComponent(lbl_direccion)
                     .addComponent(txt_giro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getData(){
+        Enterprice e = new Enterprice();
+        e.getEnterprice();
+        this.txt_rut.setText(String.valueOf(e.getRut()));
+        this.txt_dv.setText(Functions.getRutDV(e.getRut()));
+        this.txt_razonsocial.setText(e.getRazon_social());
+        this.txt_giro.setText(e.getGiro());
+    }
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         this.setVisible(false);
         this.principal.enableMenu(true);
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        String errores = "";
+        /*
+        if(txt_rut.getText().length() == 0){
+            errores += "Debe completar el campo RUT";
+        }*/
+        errores += txt_rut.getText().length() == 0 ? "Debe completar el campo RUT.\n" : "";
+        errores += txt_dv.getText().length() == 0 ? "Debe completar el campo DV.\n" : "";
+        errores += txt_razonsocial.getText().length() == 0 ? "Debe completar el campo Razón Social.\n" : "";
+        errores += txt_giro.getText().length() == 0 ? "Debe completar el campo Giro.\n" : "";
+        errores += !validarRut(txt_rut.getText()+"-"+txt_dv.getText()) ? "El RUT ingresado no es correcto.\n" : "";
+        
+        if(errores.length() > 0){
+            //Mostramos la advertencia
+            JOptionPane.showMessageDialog(rootPane, "Corrija los siguientes errores:\n"+errores, "Error en el formulario", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Enterprice e = new Enterprice(Integer.parseInt(txt_rut.getText()), txt_razonsocial.getText(), txt_giro.getText());
+            if(e.save() == 1){
+                JOptionPane.showMessageDialog(rootPane, "Confifguración almacenada exitosamente", "Configuración", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+        this.principal.enableMenu(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Se generó un error desconocido al intentar guardar", "Configuración", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
+    public static boolean validarRut(String rut) {
+
+    boolean validacion = false;
+        try {
+            rut =  rut.toUpperCase();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+            char dv = rut.charAt(rut.length() - 1);
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        } catch (java.lang.NumberFormatException e) {
+        } catch (Exception e) {
+        }
+        return validacion;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
