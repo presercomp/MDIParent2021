@@ -32,6 +32,18 @@ public class Enterprice  extends MySQL {
             return -1;
         }
     }
+    
+    public int edit(){
+        try {
+            String query = "UPDATE empresa SET ";
+            query += "razon_social= '"+this.razon_social+"', ";
+            query += "giro = '"+this.giro+"' WHERE rut_empresa = "+this.rut+";";
+            this.s.executeUpdate(query);
+            return 1;
+        }catch(SQLException ex){
+            return -1;
+        }
+    }
 
     public String getGiro() {
         return giro;

@@ -11,6 +11,7 @@ package utils;
  */
 public class Functions {
     
+    
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;

@@ -16,6 +16,7 @@ import utils.Functions;
 public class Configuration extends javax.swing.JInternalFrame {
 
     Principal principal;
+    private boolean editar;
     public Configuration(Principal p) {
         initComponents();
         this.principal = p;
@@ -137,10 +138,18 @@ public class Configuration extends javax.swing.JInternalFrame {
     private void getData(){
         Enterprice e = new Enterprice();
         e.getEnterprice();
-        this.txt_rut.setText(String.valueOf(e.getRut()));
-        this.txt_dv.setText(Functions.getRutDV(e.getRut()));
-        this.txt_razonsocial.setText(e.getRazon_social());
-        this.txt_giro.setText(e.getGiro());
+        if(String.valueOf(e.getRut()).length() > 0){
+            this.txt_rut.setText(String.valueOf(e.getRut()));
+            this.txt_dv.setText(Functions.getRutDV(e.getRut()));
+            this.txt_rut.setEnabled(false);
+            this.txt_dv.setEnabled(false);
+            this.txt_razonsocial.setText(e.getRazon_social());
+            this.txt_giro.setText(e.getGiro());
+            this.editar = true;
+        } else {
+           this.editar = false;
+        }
+        
     }
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         this.setVisible(false);
@@ -163,7 +172,20 @@ public class Configuration extends javax.swing.JInternalFrame {
             //Mostramos la advertencia
             JOptionPane.showMessageDialog(rootPane, "Corrija los siguientes errores:\n"+errores, "Error en el formulario", JOptionPane.ERROR_MESSAGE);
         } else {
-            Enterprice e = new Enterprice(Integer.parseInt(txt_rut.getText()), txt_razonsocial.getText(), txt_giro.getText());
+            Enterprice e;
+            if(this.editar){
+                e = new Enterprice();
+                e.getEnterprice();
+                e.setRut(Integer.parseInt(txt_rut.getText()));
+                e.setRazon_social(txt_razonsocial.getText());
+                e.setGiro(txt_giro.getText());
+                if(e.edit() == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Confifguración editada exitosamente", "Configuración", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+        this.principal.enableMenu(true);
+                }
+            }else{
+                e = new Enterprice(Integer.parseInt(txt_rut.getText()), txt_razonsocial.getText(), txt_giro.getText());
             if(e.save() == 1){
                 JOptionPane.showMessageDialog(rootPane, "Confifguración almacenada exitosamente", "Configuración", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
@@ -171,6 +193,8 @@ public class Configuration extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Se generó un error desconocido al intentar guardar", "Configuración", JOptionPane.ERROR_MESSAGE);
             }
+            }
+            
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
